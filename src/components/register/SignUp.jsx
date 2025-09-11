@@ -68,7 +68,7 @@ function SignUp() {
 
           <button
             className="w-full bg-blue-600 hover:bg-blue-700 text-white p-3 rounded font-semibold transition"
-            onClick={SignUpValue}
+            // onClick={SignUpValue}
           >
             Submit
           </button>

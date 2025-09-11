@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Breadcrumb from './Breadcrumb';
 import MainNavbar from '../navbar/MainNavbar';
-import getProduct from '../../config/api';
+import getProduct from '../../config/api'
 import Footer from '../footer/Footer';
 import { useNavigate } from 'react-router';
 

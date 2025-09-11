@@ -13,6 +13,7 @@ import AboutUs from "../components/aboutus/AboutUs";
 import ContactUs from "../components/contactus/ContactUs";
 import CardDetail from "../page/CardDetail";
 import Cart from "../components/cart/Cart";
+import ProductForm from "../components/productform/ProductForm";
 
 
 const router = createBrowserRouter([
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
   {
     path: "cart",
     element: <div><Cart/></div>,
+  },
+  {
+    path: "productform",
+    element: <div><ProductForm/></div>,
   },
 
 
