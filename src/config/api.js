@@ -144,7 +144,7 @@ export async function addProduct(userToken,{ title, price, description, image, c
 
 export async function setLogin({email,password}){
   try{
-    const res=await fetch('https://backend-indol-one-96.vercel.app/user/login',{
+    const res=await fetch('http://localhost:5000/user/login',{
     method:'POST',
     headers:{
         'Content-Type':'application/json'
@@ -169,7 +169,7 @@ export async function setLogin({email,password}){
 
   export async function setSignUp({ email, password, fullname }) {
     try {
-        const res = await fetch('https://shophubwebsite-node.vercel.app/user/register', {
+        const res = await fetch('http://localhost:5000/user/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
