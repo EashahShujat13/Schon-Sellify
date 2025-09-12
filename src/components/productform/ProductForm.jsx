@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { addProduct } from "../../config/api";
 import { useNavigate } from "react-router";
-
+import { useSelector } from "react-redux";
 export default function ProductForm() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
@@ -11,15 +11,17 @@ export default function ProductForm() {
 
   const navigate = useNavigate();
 
-  const handleImage = (e) => {
-    setImage(e.target.files[0]);
-  };
+  const userToken = useSelector(state => state.tokenreducer.tokens) // Redux token
+  console.log("Token:", userToken);
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // stop refresh
     try {
-      const res = await addProduct({ title, price, description, image ,category });
+      const res = await addProduct(userToken,{ title, price, description, image ,category });
       console.log("Product added:", res);
+      console.log(userToken)
       navigate("/"); // redirect after success
     } catch (err) {
       console.log("Error posting product:", err);
@@ -90,7 +92,7 @@ onChange={(e) => setCategory(e.target.value)}
             <input
               type="file"
               className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-gray-50 text-gray-800 cursor-pointer focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
-              onChange={handleImage}
+              onChange={(e)=>{setImage(e.target.files[0])}}
             />
           </div>
 {/*   Add Product */}

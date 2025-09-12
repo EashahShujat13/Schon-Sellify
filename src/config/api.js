@@ -1,48 +1,48 @@
 
 
-export async function SetSignUp({ email, password, fullname}) {
-  try{
-    const res =await fetch('https://node-js-azure-nine.vercel.app/user/register',{
-        method: 'POST',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body: JSON.stringify({
-            email,
-            password,
-            fullname
-        })
-    });
+// export async function SetSignUp({ email, password, fullname}) {
+//   try{
+//     const res =await fetch('https://node-js-azure-nine.vercel.app/user/register',{
+//         method: 'POST',
+//         headers:{
+//             'Content-Type':'application/json'
+//         },
+//         body: JSON.stringify({
+//             email,
+//             password,
+//             fullname
+//         })
+//     });
 
-    if(!res.ok){
-        throw new Error('Network response was not ok');
-    }
-    const result =await res.json();
-    return result;
-  }
+//     if(!res.ok){
+//         throw new Error('Network response was not ok');
+//     }
+//     const result =await res.json();
+//     return result;
+//   }
 
-  catch(error){
-    console.error("Error during sign-up:", error);
-        throw error;
-  }
-}
+//   catch(error){
+//     console.error("Error during sign-up:", error);
+//         throw error;
+//   }
+// }
 
 
-export async function setLogin({email,password}){
-    const res=await fetch('https://dashboard-flax-two.vercel.app/api/auth/login',{
-    method:'POST',
-    headers:{
-        'Content-Type':'application/json'
-    },
-    body:JSON.stringify({
-        email,
-        password
-    })
-})
-const result = await res.json()
-    return result;
+// export async function setLogin({email,password}){
+//     const res=await fetch('https://dashboard-flax-two.vercel.app/api/auth/login',{
+//     method:'POST',
+//     headers:{
+//         'Content-Type':'application/json'
+//     },
+//     body:JSON.stringify({
+//         email,
+//         password
+//     })
+// })
+// const result = await res.json()
+//     return result;
     
-}
+// }
 
 
 
@@ -116,7 +116,7 @@ export async function getSingleProduct(id) {
 
 // const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-export async function addProduct({ title, price, description, image, category }) {
+export async function addProduct(userToken,{ title, price, description, image, category ,}) {
   try {
     const formData = new FormData();  
     formData.append("title", title);
@@ -125,9 +125,12 @@ export async function addProduct({ title, price, description, image, category })
     formData.append("image", image);
     formData.append("category", category);
 
-    const res = await fetch("https://node-apicom.vercel.app/product/post", {   // or /product/post if your backend uses that
+    const res = await fetch("http://localhost:5000/product/post", {   // or /product/post if your backend uses that
       method: "POST",
-      body: formData,
+      headers:{
+      "Authorization": `Bearer ${userToken}`  // Include token in headers
+      },
+      body: formData,userToken
     });
 
     if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
@@ -137,3 +140,55 @@ export async function addProduct({ title, price, description, image, category })
     throw error;
   }
 }
+
+
+export async function setLogin({email,password}){
+  try{
+    const res=await fetch('https://backend-indol-one-96.vercel.app/user/login',{
+    method:'POST',
+    headers:{
+        'Content-Type':'application/json'
+    },
+    body:JSON.stringify({
+        email,
+        password
+    })
+})
+  if (!res.ok) {
+            throw new Error(`Failed to login up: ${res.statusText}`);
+        }
+
+        const result = await res.json();
+        return result;
+    } catch (error) {
+        // Handle any errors, you can log them or throw them further
+        console.error("Error during login-up:", error);
+        throw error; // Rethrow the error for the caller to handle
+    }
+  }
+
+  export async function setSignUp({ email, password, fullname }) {
+    try {
+        const res = await fetch('https://shophubwebsite-node.vercel.app/user/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                password,
+                fullname
+            })
+        });
+
+        if (!res.ok) {
+            throw new Error(`Failed to sign up: ${res.statusText}`);
+        }
+
+        const result = await res.json();
+        return result;
+    } catch (error) {
+        // Handle any errors, you can log them or throw them further
+        console.error("Error during sign-up:", error);
+        throw error; // Rethrow the error for the caller to handle
+    }}
