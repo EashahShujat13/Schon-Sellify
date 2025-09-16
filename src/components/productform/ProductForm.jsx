@@ -19,7 +19,7 @@ export default function ProductForm() {
   const handleSubmit = async (e) => {
     e.preventDefault(); // stop refresh
     try {
-      const res = await addProduct(userToken,{ title, price, description, image ,category });
+      const res = await addProduct(userToken,{ title, price, description,category });
       console.log("Product added:", res);
       console.log(userToken)
       navigate("/"); // redirect after success
@@ -85,16 +85,7 @@ onChange={(e) => setCategory(e.target.value)}
 </div>
 
 {/*  Upload Image */}
-          <div>
-            <label className="block text-gray-700 font-semibold mb-2">
-              Upload Image
-            </label>
-            <input
-              type="file"
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-gray-50 text-gray-800 cursor-pointer focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
-              onChange={(e)=>{setImage(e.target.files[0])}}
-            />
-          </div>
+        
 {/*   Add Product */}
           <div className="text-center">
             <button
@@ -109,3 +100,15 @@ onChange={(e) => setCategory(e.target.value)}
     </div>
   );
 }
+
+
+  // <div>
+  //           <label className="block text-gray-700 font-semibold mb-2">
+  //             Upload Image
+  //           </label>
+  //           <input
+  //             type="file"
+  //             className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-gray-50 text-gray-800 cursor-pointer focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
+  //             onChange={(e)=>{setImage(e.target.files[0])}}
+  //           />
+  //         </div>

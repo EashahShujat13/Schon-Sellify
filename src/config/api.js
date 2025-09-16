@@ -116,35 +116,65 @@ export async function getSingleProduct(id) {
 
 // const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-export async function addProduct(userToken,{ title, price, description, image, category ,}) {
+// export async function addProduct(userToken, { title, price, description, image, category }) {
+//   const formData = new FormData();
+//   formData.append("title", title);
+//   formData.append("price", price);
+//   formData.append("description", description);
+//   if (image) formData.append("image", image);
+//   formData.append("category", category);
+
+//   const res = await fetch("http://localhost:5000/product/post", {
+//     method: "POST",
+//     headers: {
+//       Authorization: `Bearer ${userToken}`
+//       // ❌ don’t set Content-Type manually! fetch handles it with FormData
+//     },
+//     body: formData
+//   });
+
+//   if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+//   return await res.json();
+// }
+
+
+export async function addProduct(userToken, postData) {
   try {
-    const formData = new FormData();  
-    formData.append("title", title);
-    formData.append("price", price);
-    formData.append("description", description);
-    formData.append("image", image);
-    formData.append("category", category);
+  // const formData = new FormData();
+  // formData.append("title", title);
+  // formData.append("price", price);
+  // formData.append("description", description);
+  // formData.append("category", category);
 
-    const res = await fetch("http://localhost:5000/product/post", {   // or /product/post if your backend uses that
-      method: "POST",
-      headers:{
-      "Authorization": `Bearer ${userToken}`  // Include token in headers
-      },
-      body: formData,userToken
-    });
+  const res = await fetch("http://localhost:5000/product/post", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+      "Content-Type": "application/json",   // ✅ Add this
+      // ❌ don’t set Content-Type manually! fetch handles it with FormData
+    },
+      body: JSON.stringify({
+                title: postData.title,
+                price: postData.price,
+                description: postData.description,
+                category: postData.category,
+                
+            })
+  });
 
-    if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-    return await res.json();
-  } catch (error) {
-    console.log("Error adding product in api:", error);
-    throw error;
+      const result = await response.json();
+        return result
   }
+         catch (error) {
+        alert('Something went wrong',error);
+    }
 }
+
 
 
 export async function setLogin({email,password}){
   try{
-    const res=await fetch('http://localhost:5000/user/login',{
+    const res=await fetch('https://node-apicom.vercel.app/user/login',{
     method:'POST',
     headers:{
         'Content-Type':'application/json'
@@ -169,7 +199,7 @@ export async function setLogin({email,password}){
 
   export async function setSignUp({ email, password, fullname }) {
     try {
-        const res = await fetch('http://localhost:5000/user/register', {
+        const res = await fetch('https://node-apicom.vercel.app/user/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
