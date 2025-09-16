@@ -163,7 +163,9 @@ export async function addProduct(userToken, postData) {
   });
 
       const result = await res.json();
+      alert("Product posted scessfully")
         return result
+        
   }
          catch (error) {
            console.error("Something went wrong:", error);
