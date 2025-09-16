@@ -146,7 +146,7 @@ export async function addProduct(userToken, postData) {
   // formData.append("description", description);
   // formData.append("category", category);
 
-  const res = await fetch("http://localhost:5000/product/post", {
+  const res = await fetch("https://node-apicom.vercel.app/product/post", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${userToken}`,
