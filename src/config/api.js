@@ -162,11 +162,12 @@ export async function addProduct(userToken, postData) {
             })
   });
 
-      const result = await response.json();
+      const result = await res.json();
         return result
   }
          catch (error) {
-        alert('Something went wrong',error);
+           console.error("Something went wrong:", error);
+            throw error; // Rethrow the error for the caller to handle
     }
 }
 
